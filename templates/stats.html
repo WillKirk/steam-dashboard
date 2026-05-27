@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="stats-header">
+    <h1>My Stats</h1>
+</div>
+
+<div class="stat-cards">
+    <div class="stat-card">
+        <span class="stat-value">{{ total_hours }}</span>
+        <span class="stat-label">Total Hours</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-value">{{ total_games }}</span>
+        <span class="stat-label">Games Owned</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-value">{{ played }}</span>
+        <span class="stat-label">Games Played</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-value">{{ unplayed }}</span>
+        <span class="stat-label">Never Played</span>
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="section-title">Top 10 Most Played</h2>
+    <div class="chart-container">
+        <canvas id="playtimeChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = {{ chart_labels | tojson }};
+    const data = {{ chart_data | tojson }};
+
+    new Chart(document.getElementById('playtimeChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Hours Played',
+                data: data,
+                backgroundColor: 'rgba(102, 192, 244, 0.6)',
+                borderColor: 'rgba(102, 192, 244, 1)',
+                borderWidth: 1,
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.parsed.y} hrs`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { 
+                        color: '#c6d4df',
+                        maxRotation: 30,
+                    },
+                    grid: { color: '#2a475e' }
+                },
+                y: {
+                    ticks: { 
+                        color: '#c6d4df',
+                        callback: val => `${val}h`
+                    },
+                    grid: { color: '#2a475e' }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

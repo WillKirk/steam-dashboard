@@ -50,5 +50,26 @@ def game(app_id):
     
     return render_template("game.html", app_id=app_id, achievements=merged, unlocked=unlocked, total=len(merged))
 
+@app.route("/stats")
+def stats():
+    games = get_owned_games()
+    
+    total_hours = sum(g["playtime_forever"] for g in games) / 60
+    played = [g for g in games if g["playtime_forever"] > 0]
+    unplayed = len(games) - len(played)
+    
+    top10 = games[:10]
+    chart_labels = [g["name"] for g in top10]
+    chart_data = [round(g["playtime_forever"] / 60, 1) for g in top10]
+    
+    return render_template("stats.html",
+        total_hours=round(total_hours, 1),
+        total_games=len(games),
+        played=len(played),
+        unplayed=unplayed,
+        chart_labels=chart_labels,
+        chart_data=chart_data
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)
