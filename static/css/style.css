@@ -130,3 +130,34 @@ main {
     color: #8f98a0;
     margin-top: 0.25rem;
 }
+
+/* ===== RECENTLY PLAYED ===== */
+.section-title {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.recent-card {
+    background: #2a475e;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recent-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.recent-card img {
+    width: 100%;
+    aspect-ratio: 460 / 215;
+    object-fit: cover;
+}

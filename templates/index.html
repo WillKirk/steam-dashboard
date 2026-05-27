@@ -1,12 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
+
 <div class="profile">
     {% if player %}
         <img src="{{ player.avatarfull }}" alt="Avatar">
-        <h1>{{ player.personaname }}</h1>
-        <p>Steam ID: {{ player.steamid }}</p>
-    {% else %}
-        <p>Could not load profile. Check your API key and Steam ID.</p>
+        <div>
+            <h1>{{ player.personaname }}</h1>
+            <p>Steam ID: {{ player.steamid }}</p>
+        </div>
     {% endif %}
 </div>
+
+<h2 class="section-title">{{ section_title }}</h2>
+<div class="recent-grid">
+    {% for game in games %}
+    <div class="recent-card">
+        <img src="https://cdn.akamai.steamstatic.com/steam/apps/{{ game.appid }}/header.jpg" alt="{{ game.name }}">
+        <div class="game-info">
+            <h3>{{ game.name }}</h3>
+            <p>{{ (game.playtime_forever / 60) | round(1) }} hrs total</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
