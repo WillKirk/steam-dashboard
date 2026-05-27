@@ -3,5 +3,5 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-STEAM_API_KEY = os.getenv("E0ED6B20E8CD32061757D37DD069C979")
-STEAM_ID = os.getenv("76561198044611804")
+STEAM_API_KEY = os.getenv("STEAM_API_KEY")
+STEAM_ID = os.getenv("STEAM_ID")

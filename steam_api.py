@@ -1,6 +1,9 @@
 import requests
 from config import STEAM_API_KEY, STEAM_ID
 
+print(f"KEY: '{STEAM_API_KEY}'")
+print(f"ID: '{STEAM_ID}'")
+
 BASE_URL = "https://api.steampowered.com"
 
 def get_player_summary():
