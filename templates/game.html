@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div id="loader" class="loader-overlay">
+    <div class="spinner"></div>
+    <p>Loading achievements...</p>
+</div>
+
+<div id="content" style="display: none">
+
 <a href="/library" class="back-link">← Back to Library</a>
 
 {% if achievements is none %}
@@ -29,5 +36,14 @@
         {% endfor %}
     </div>
 {% endif %}
+
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    });
+</script>
 
 {% endblock %}

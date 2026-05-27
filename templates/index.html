@@ -14,13 +14,13 @@
 <h2 class="section-title">{{ section_title }}</h2>
 <div class="recent-grid">
     {% for game in games %}
-    <div class="recent-card">
+    <a href="/game/{{ game.appid }}" class="recent-card">
         <img src="https://cdn.akamai.steamstatic.com/steam/apps/{{ game.appid }}/header.jpg" alt="{{ game.name }}">
         <div class="game-info">
             <h3>{{ game.name }}</h3>
             <p>{{ (game.playtime_forever / 60) | round(1) }} hrs total</p>
         </div>
-    </div>
+    </a>
     {% endfor %}
 </div>
 
