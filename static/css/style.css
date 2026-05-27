@@ -252,3 +252,39 @@ a.game-card {
     color: inherit;
     text-decoration: none;
 }
+
+/* ===== LIBRARY CONTROLS ===== */
+.library-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.library-controls input,
+.library-controls select {
+    background: #2a475e;
+    border: 1px solid #4a7a9b;
+    color: #c6d4df;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.library-controls input {
+    width: 250px;
+}
+
+.library-controls input::placeholder {
+    color: #8f98a0;
+}
+
+.library-controls select option {
+    background: #1b2838;
+}
+
+.library-controls input:focus,
+.library-controls select:focus {
+    border-color: #66c0f4;
+}

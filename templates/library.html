@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
+
 <div class="library-header">
     <h1>Game Library</h1>
-    <p>{{ games|length }} games</p>
+    <p><span id="game-count">{{ games|length }}</span> games</p>
+    <div class="library-controls">
+        <input type="text" id="search" placeholder="Search games..." autocomplete="off">
+        <select id="sort">
+            <option value="playtime">Most Played</option>
+            <option value="alphabetical">A–Z</option>
+            <option value="least">Least Played</option>
+        </select>
+    </div>
 </div>
 
-<div class="game-grid">
+<div class="game-grid" id="game-grid">
     {% for game in games %}
-    <a href="/game/{{ game.appid }}" class="game-card">
+    <a href="/game/{{ game.appid }}" class="game-card"
+       data-name="{{ game.name | lower }}"
+       data-playtime="{{ game.playtime_forever }}">
         <img src="https://cdn.akamai.steamstatic.com/steam/apps/{{ game.appid }}/header.jpg" alt="{{ game.name }}">
         <div class="game-info">
             <h3>{{ game.name }}</h3>
@@ -16,4 +27,39 @@
     </a>
     {% endfor %}
 </div>
+
+<script>
+    const search = document.getElementById('search');
+    const sort = document.getElementById('sort');
+    const grid = document.getElementById('game-grid');
+    const countEl = document.getElementById('game-count');
+
+    function updateGrid() {
+        const query = search.value.toLowerCase();
+        const sortBy = sort.value;
+        const cards = [...grid.querySelectorAll('.game-card')];
+
+        // Filter
+        cards.forEach(card => {
+            const name = card.dataset.name;
+            card.style.display = name.includes(query) ? '' : 'none';
+        });
+
+        // Sort
+        const visible = cards.filter(c => c.style.display !== 'none');
+        visible.sort((a, b) => {
+            if (sortBy === 'alphabetical') return a.dataset.name.localeCompare(b.dataset.name);
+            if (sortBy === 'playtime') return b.dataset.playtime - a.dataset.playtime;
+            if (sortBy === 'least') return a.dataset.playtime - b.dataset.playtime;
+        });
+        visible.forEach(card => grid.appendChild(card));
+
+        // Update count
+        countEl.textContent = visible.length;
+    }
+
+    search.addEventListener('input', updateGrid);
+    sort.addEventListener('change', updateGrid);
+</script>
+
 {% endblock %}
