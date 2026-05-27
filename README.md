@@ -4,8 +4,6 @@ A personal Steam stats dashboard built with Python and Flask, using the Steam We
 
 **Live demo:** [steam-dashboard-wk.vercel.app](https://steam-dashboard-wk.vercel.app)
 
-![Steam Dashboard](https://cdn.akamai.steamstatic.com/steam/apps/1145360/header.jpg)
-
 ---
 
 ## Features
