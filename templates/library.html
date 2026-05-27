@@ -7,13 +7,13 @@
 
 <div class="game-grid">
     {% for game in games %}
-    <div class="game-card">
+    <a href="/game/{{ game.appid }}" class="game-card">
         <img src="https://cdn.akamai.steamstatic.com/steam/apps/{{ game.appid }}/header.jpg" alt="{{ game.name }}">
         <div class="game-info">
             <h3>{{ game.name }}</h3>
             <p>{{ (game.playtime_forever / 60) | round(1) }} hrs</p>
         </div>
-    </div>
+    </a>
     {% endfor %}
 </div>
 {% endblock %}

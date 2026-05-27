@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="/library" class="back-link">← Back to Library</a>
+
+{% if achievements is none %}
+    <p class="no-achievements">This game has no achievements.</p>
+{% else %}
+    <div class="achievement-header">
+        <h1>Achievements</h1>
+        <p>{{ unlocked }} / {{ total }} unlocked</p>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ (unlocked / total * 100) | round }}%"></div>
+        </div>
+    </div>
+
+    <div class="achievement-list">
+        {% for ach in achievements %}
+        <div class="achievement {{ 'achieved' if ach.achieved else 'locked' }}">
+            <img src="{{ ach.icon if ach.achieved else ach.icon_gray }}" alt="{{ ach.name }}">
+            <div class="achievement-info">
+                <h3>{{ ach.name }}</h3>
+                <p>{{ ach.description }}</p>
+            </div>
+            {% if ach.achieved %}
+            <span class="badge">✓</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock %}

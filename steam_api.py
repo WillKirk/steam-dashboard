@@ -38,3 +38,32 @@ def get_recently_played():
     response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()["response"].get("games", [])
+
+def get_achievements(app_id):
+    url = f"{BASE_URL}/ISteamUserStats/GetPlayerAchievements/v1/"
+    params = {
+        "key": STEAM_API_KEY,
+        "steamid": STEAM_ID,
+        "appid": app_id
+    }
+    response = requests.get(url, params=params)
+    if response.status_code == 403:
+        return None  # Game doesn't support achievements
+    response.raise_for_status()
+    data = response.json()["playerstats"]
+    if not data.get("success") or "achievements" not in data:
+        return None
+    return data["achievements"]
+
+def get_game_schema(app_id):
+    url = f"{BASE_URL}/ISteamUserStats/GetSchemaForGame/v2/"
+    params = {
+        "key": STEAM_API_KEY,
+        "appid": app_id
+    }
+    response = requests.get(url, params=params)
+    response.raise_for_status()
+    stats = response.json().get("game", {}).get("availableGameStats", {})
+    achievements = stats.get("achievements", [])
+    # Return as a dict keyed by achievement name for easy lookup
+    return {a["name"]: a for a in achievements}

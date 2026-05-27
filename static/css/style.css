@@ -161,3 +161,94 @@ main {
     aspect-ratio: 460 / 215;
     object-fit: cover;
 }
+
+/* ===== GAME / ACHIEVEMENTS ===== */
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #66c0f4;
+}
+
+.achievement-header {
+    margin-bottom: 2rem;
+}
+
+.achievement-header h1 {
+    color: #fff;
+    font-size: 1.8rem;
+}
+
+.achievement-header p {
+    color: #8f98a0;
+    margin: 0.25rem 0 0.75rem;
+}
+
+.progress-bar {
+    background: #1b2838;
+    border-radius: 4px;
+    height: 8px;
+    width: 300px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: #66c0f4;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #2a475e;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+}
+
+.achievement.locked {
+    opacity: 0.5;
+}
+
+.achievement img {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.achievement-info h3 {
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.achievement-info p {
+    color: #8f98a0;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+}
+
+.badge {
+    margin-left: auto;
+    color: #66c0f4;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.no-achievements {
+    color: #8f98a0;
+}
+
+/* Make game cards work as links */
+a.game-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
